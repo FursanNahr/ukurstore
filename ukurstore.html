@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>
+        .navbar{
+            background-color: #FFD60A;
+            position: fixed;
+            width: 100%;
+            height: 50px;
+
+        }
+        .navbar-1{
+            margin-top: -8px;
+            margin-left: -8px;
+            width: 100%;
+        }
+        .foto-logo{
+            height: 30px;
+            margin-left: 5px;
+            margin-top: 8px;
+        }
+        .textLogo{
+            position: absolute;
+            left: 45px;
+            top: -2px;
+        }
+        .home{
+            position: absolute;
+            height: 25px;
+            top:9px;
+        }
+        .history{
+            position: absolute;
+            height: 25px;
+            margin-left: 50px;
+            top: 10px;
+        }
+        .elemen{
+            /* text-align: center; */
+            display: flex;
+            justify-content: center;
+        }
+        ul.ul li {
+            display: inline-block;
+            position: absolute;
+            top: 15px;
+        }
+        .li1{
+            margin-left: -150px;
+        }
+        .li2{
+            margin-left: -50px;
+        }
+        .li3{
+            margin-left: 50px;
+        }
+        .search{
+            position: absolute;
+            margin-left: 550px;
+            top: 13px;
+            border-radius: 50px;
+            border: 1px solid #333;
+            height: 20px;
+        }
+        .pp2{
+            position: absolute;
+            height: 35px;
+            right: 10px;
+            top: 9px; /* Atur posisi vertikal jika diperlukan */
+        }
+        .wallet2{
+            position: absolute;
+            right: 75px;
+            height: 20px;
+            top: 15px;
+        }
+        body{
+            background-color: #000814;
+        }
+        .waktu{
+            color: aliceblue;
+        }
+        .iklan{
+            width: 600px;
+            top: 176px;
+            left: 50%;
+            position: absolute;
+            transform: translate(-50%, -50%);
+            overflow: hidden;
+        }
+        .wrap{
+            display: flex;
+            animation: slide 10s infinite;
+        }
+        .wrap img{
+            width: 100%;
+            height: 250px;
+        }
+
+        @keyframes slide{
+            0%{transform: translateX(0);}
+            10%{transform: translateX(0);}
+            10%{transform: translateX(0);}
+            45%{transform: translateX(-100%);}
+            75%{transform: translateX(-200%);}
+            100%{transform: translateX(-300%);}
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div :class="kelompok1">
+            <nav :class="className">
+                <div :class="logotext">
+                    <img :src="logo" :class="foto1" alt="">
+                    <p :class="textLogo">{{namalogo}}</p>
+                    <p id="time" class="waktu"></p>
+                <div :class="elemen">
+                    <ul :class="navbar">
+                        <li :class="li1"><a href="#home">{{navbar1}}</a></li>
+                        <li :class="li2"><a href="#services">{{navbar2}}</a></li>
+                        <li :class="li3"><a href="#about">{{navbar3}}</a></li>
+                    </ul>
+                    <input type="text" :class="search" value="search">
+                </div>
+                <img :src="pp" alt="" :class="pp2">
+                <img :src="wallet" class="wallet2" alt="">
+            </nav>
+
+            <div :class="iklan">
+                <div class="wrap">
+                    <img :src="iklan1" class="iklan11" alt="">
+                    <img :src="iklan2" class="iklan22" alt="">
+                    <img :src="iklan3" class="iklan33" alt="">
+                    <img :src="iklan4" class="iklan44" alt="">
+                </div>   
+            </div>
+            
+        </div>
+        
+        <script>
+              const getServerTime = async () => {
+              try {
+                const response = await axios.get('http://139.180.132.170:3000/api_ajib/time');
+                const ServerTimeMessage = response.data.message;
+        
+                document.getElementById('time').innerText = `Waktu Server: ${ServerTimeMessage}`;
+              } catch (error) {
+                document.getElementById('time').innerText = `Gagal Mengambil waktu ${error}`;
+              }
+            };
+
+            const intervalId = setInterval(() => {
+              getServerTime();
+            },1000);
+        </script>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+<script>
+  const app = Vue.createApp({
+   data() {
+    return {
+     className: 'navbar',
+     logo: 'assets/logo.svg',
+     kelompok1: 'navbar-1',
+     foto1: 'foto-logo',
+     textLogo: 'textLogo',
+     home: 'assets/Home.svg',
+     home2: 'home',
+     elemen: 'elemen',
+     history: 'assets/history.svg',
+     history2: 'history',
+     navbar: 'ul',
+     li1: 'li1',
+     li2: 'li2',
+     li3: 'li3',
+     search: 'search',
+     elemenKanan: 'elemenKanan',
+     pp: 'assets/user.svg',
+     pp2: 'pp2',
+     wallet: 'assets/wallet.svg',
+     wallet2: 'wallet2',
+     logotext: 'logotext',
+     iklan: 'iklan',
+     namalogo: 'UKUR STORE',
+     navbar1: 'Home',
+     navbar2: 'History',
+     navbar3: 'Coupon',
+     iklan1: 'assets/iklan1.png',
+     iklan2: 'assets/iklan2.png',
+     iklan3: 'assets/iklan3.png',
+     iklan4: 'assets/iklan4.png'
+
+    }
+   }
+  })
+  
+  app.mount('#app')
+
+</script>
+</body>
+</html>
